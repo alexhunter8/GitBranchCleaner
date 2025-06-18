@@ -22,7 +22,7 @@ def is_protected(branch, protected):
 def main():
     ap = argparse.ArgumentParser(description='Clean stale local branches safely')
     ap.add_argument('--days', type=int, default=90, help='stale if no commit in N days')
-    ap.add_argument('--protected', action='append', default=['main','master','develop','release/.*','hotfix/.*'], help='regex of branches to keep')
+    ap.add_argument('--protected', action='append', default=['main','master','develop','release/.+','hotfix/.+'], help='regex of branches to keep')
     ap.add_argument('--dry-run', action='store_true', help='only show actions')
     ap.add_argument('--delete-merged', action='store_true', help='also delete branches fully merged into current')
     ap.add_argument('--yes', action='store_true', help='do not prompt')
@@ -59,7 +59,10 @@ def main():
 
     targets = []
     for b,d in stale:
-        if b in merged or not args.delete_merged:
+        if args.delete_merged:
+            if b in merged:
+                targets.append((b,d))
+        else:
             targets.append((b,d))
 
     if not targets:
