@@ -14,3 +14,7 @@ Small CLI to list, filter, and clean stale local git branches with safety checks
   
   python3 src/gbclean.py --days 120 --delete-merged
 
+
+## Notes
+- Uses local git; no network needed.
+- If parsing ISO dates fails, they are skipped.
