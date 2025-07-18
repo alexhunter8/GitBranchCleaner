@@ -18,3 +18,5 @@ Small CLI to list, filter, and clean stale local git branches with safety checks
 ## Notes
 - Uses local git; no network needed.
 - If parsing ISO dates fails, they are skipped.
+
+- Add  optional helper using autopep8.
